@@ -2,12 +2,13 @@ google.charts.load('current', {
     'packages':['corechart','geochart']
 });
 
-fetch('./stations.json').then(res=>res.json()).then((res)=>{
+fetch('https://scripts.sweshelo.jp/stations.json').then(res=>res.json()).then((res)=>{
     const list = document.getElementById('stations-list');
 
-    res.forEach((obj)=>{
+    console.log(res);
+    res.prefectures.forEach((obj)=>{
         const child = document.createElement('li');
-        child.innerHTML = '<span>'+obj.name+'</span><input type="number" id="sta-'+code+'" max='+obj.count+'></input><span> / '+obj.count+'</span>';
+        child.innerHTML = '<span>'+obj.name+'</span><input type="number" id="sta-'+obj.code+'" max='+obj.count+'></input><span> / '+obj.count+'</span>';
         list.appendChild(child);
     });
 })

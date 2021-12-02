@@ -2,13 +2,16 @@ google.charts.load('current', {
     'packages':['corechart','geochart']
 });
 
+var prefectures = [];
+
 fetch('https://scripts.sweshelo.jp/stations.json').then(res=>res.json()).then((res)=>{
     const list = document.getElementById('stations-list');
 
     console.log(res);
+    prefectures = res.prefectures;
     res.prefectures.forEach((obj)=>{
         const child = document.createElement('li');
-        child.innerHTML = '<span>'+obj.name+'</span><input type="number" id="sta-'+obj.code+'" max='+obj.count+'></input><span> / '+obj.count+'</span>';
+        child.innerHTML = '<span>'+obj.name+'</span><input type="number" id="pref-'+obj.code+'" max='+obj.count+' value="0"></input><span> / '+obj.count+'</span>';
         list.appendChild(child);
     });
 })
@@ -27,7 +30,13 @@ function gradient(){
 }
 
 function getData(){
-    //    document.getElementById('');
+    const data = [['都道府県名','取得率(%)']];
+    prefectures.forEach((pref)=>{
+        let cnt = document.getElementById('pref-'+pref.code).value;
+        data.push([pref.name, cnt/pref.count*100])
+    });
+    console.log(data);
+    return data;
 }
 
 function drawMap() {

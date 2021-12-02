@@ -11,10 +11,12 @@ fetch('https://scripts.sweshelo.jp/stations.json').then(res=>res.json()).then((r
     prefectures = res.prefectures;
     res.prefectures.forEach((obj)=>{
         const child = document.createElement('li');
-        child.innerHTML = '<span>'+obj.name+'</span><input type="number" id="pref-'+obj.code+'" max='+obj.count+' value="0"></input><span> / '+obj.count+'</span>';
+        child.innerHTML = '<div class="pref"><p class="pref-name" OnClick="document.getElementById(\'pref-'+obj.code+'\').value = '+obj.count+'">'+obj.name+'</p><input type="number" class="pref-count" id="pref-'+obj.code+'" max='+obj.count+' min="0" value="0"></input><span class="maxcnt"> / '+obj.count+'</span></div>';
         list.appendChild(child);
     });
 })
+google.charts.setOnLoadCallback(drawMap);
+
 
 function toHex(v) {
     return ('00' + v.toString(16).toUpperCase()).substr(-2);

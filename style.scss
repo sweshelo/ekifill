@@ -1,3 +1,27 @@
 #stations{
-
+    overflow : hidden;
+    #stations-list{
+        list-style : none;
+        padding : 0;
+        overflow : hidden;
+        li{
+            width : 190px;
+            float : left;
+            .pref{
+                overflow : hidden;
+                .pref-name{
+                    margin : 0;
+                    width : 4em;
+                    float : left;
+                }
+                .pref-count{
+                    width : 3em;
+                    padding : 0;
+                }
+                .maxcnt{
+                    font-size : 0.2em;
+                }
+            }
+        }
+    }
 }
